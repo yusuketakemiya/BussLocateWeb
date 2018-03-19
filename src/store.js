@@ -50,7 +50,7 @@ export default {
       strict: true,
       namespaced: true,
       state: {
-        index: 1
+        index: 0
       },
       mutations: {
         set(state, index) {

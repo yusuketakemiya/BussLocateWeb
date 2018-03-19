@@ -9,7 +9,7 @@ import VueOnsen from 'vue-onsenui'; // For UMD
 // import * as OnsenComponents from './onsen-components'; // For ESM
 import storeLike from './store.js';
 import CustomToolbar from './partials/CustomToolbar.vue';
-import AppNavigator from './AppNavigator.vue';
+import AppMain from './AppMain.vue';
 
 Vue.use(Vuex);
 Vue.use(VueOnsen);
@@ -20,7 +20,7 @@ Vue.component('custom-toolbar', CustomToolbar); // Common toolbar
 
 new Vue({
   el: '#app',
-  render: h => h(AppNavigator),
+  render: h => h(AppMain),
   store: new Vuex.Store(storeLike),
   beforeCreate() {
     // Shortcut for Material Design

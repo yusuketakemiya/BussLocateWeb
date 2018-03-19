@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import AppSplitter from './AppSplitter.vue';
+import Menue from './pages/Menue.vue';
 
 export default {
   beforeCreate() {
-    this.$store.commit('navigator/push', AppSplitter);
+    this.$store.commit('navigator/push', Menue);
   },
   data() {
     return {

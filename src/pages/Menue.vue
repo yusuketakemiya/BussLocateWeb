@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <p class="intro">
-      This is a kitchen sink example that shows off the Vue bindings for Onsen UI.<br><br>
+      一覧<br><br>
     </p>
 
     <v-ons-card v-for="page of pages" :key="page.label"
@@ -66,7 +66,7 @@ export default {
         data() {
           return {
             toolbarInfo: {
-              backLabel: 'Home',
+              backLabel: 'Menue',
               title: key
             }
           }
