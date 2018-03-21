@@ -4,8 +4,8 @@
       一覧<br><br>
     </p>
 
-    <v-ons-card v-for="page of pages" :key="page.label"
-      @click="push(page.component, page.label)"
+    <v-ons-card v-for="page of getPages" :key="page.label"
+      @click="push(page.component, page.label, page.flow)"
     >
       <div class="title">{{ page.label }}</div>
       <div class="content">{{ page.desc }}</div>
@@ -14,53 +14,28 @@
 </template>
 
 <script>
-import PullHook from './PullHook.vue';
-import Dialogs from './Dialogs.vue';
-import Buttons from './Buttons.vue';
-import Carousel from './Carousel.vue';
-import InfiniteScroll from './InfiniteScroll.vue';
-import Progress from './Progress.vue';
+import BussLocate from './BussLocate.vue';
 
 export default {
-  data () {
-    return {
-      pages: [
+  computed: {
+    getPages() {
+      var flows = this.$store.state.bussflow.items;
+      var pages = [];  
+      flows.forEach(flow => {
+        pages.push(
         {
-          component: PullHook,
-          label: 'Pull Hook',
-          desc: 'Simple "pull to refresh" functionality to update data.'
-        },
-        {
-          component: Dialogs,
-          label: 'Dialogs',
-          desc: 'Components and utility methods to display many types of dialogs.'
-        },
-        {
-          component: Buttons,
-          label: 'Buttons',
-          desc: 'Different styles for buttons, floating action buttons and speed dials.'
-        },
-        {
-          component: Carousel,
-          label: 'Carousel',
-          desc: 'Customizable carousel that can be optionally fullscreen.'
-        },
-        {
-          component: InfiniteScroll,
-          label: 'Infinite Scroll',
-          desc: 'Two types of infinite lists: "Load More" and "Lazy Repeat".'
-        },
-        {
-          component: Progress,
-          label: 'Progress',
-          desc: 'Linear progress, circular progress and spinners.'
-        }
-      ]
-    };
+          component: BussLocate,
+          label: '[' + flow.company + ']' + flow.from + ' - ' + flow.to,
+          desc: flow.desc,
+          flow: flow
+        });
+      });
+      return pages;
+    }
   },
-
   methods: {
-    push(page, key) {
+    push(page, key, flow) {
+      this.$store.commit('bussflow/set', { extends: flow });
       this.$store.commit('navigator/push', {
         extends: page,
         data() {

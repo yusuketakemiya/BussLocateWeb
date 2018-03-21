@@ -57,6 +57,22 @@ export default {
           state.index = index;
         }
       }
-    }
+    },
+    bussflow: {
+      strict: true,
+      namespaced: true,
+      state: {
+        items: [
+          { name : 'test', company: '西部バス', from: '土支田一丁目', to: '光が丘駅', desc: 'TEST' },
+          { name : 'test', company: '西部バス', from: '光が丘駅', to: '土支田一丁目', desc: 'TEST' }
+        ],
+        current : null
+      },
+      mutations: {
+        set(state, flow) {
+          state.current = flow;
+        }
+      }
+    },
   }
 };
