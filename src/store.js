@@ -70,6 +70,7 @@ export default {
       },
       mutations: {
         set(state, flow) {
+          console.log(flow.from);
           state.current = flow;
         }
       }

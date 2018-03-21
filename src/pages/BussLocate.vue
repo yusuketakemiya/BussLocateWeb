@@ -30,15 +30,11 @@
 
     </v-ons-pull-hook>
 
-    <v-ons-list>
-      <v-ons-list-header>Pull to refresh</v-ons-list-header>
-      <v-ons-list-item v-for="(kitten, index) in kittens" :key="kitten.name + index">
-        <div class="left">
-          <img class="list-item__thumbnail" :src="kitten.url">
-        </div>
-        <div class="center">{{ kitten.name }}</div>
-      </v-ons-list-item>
-    </v-ons-list>
+    <label class="center">{{ flow.name }}</label>
+    <label class="center">{{ flow.company }}</label>
+    <label class="center">{{ flow.from }}</label>
+    <label class="center">{{ flow.to }}</label>
+    <label class="center">{{ flow.desc }}</label>
 
   </v-ons-page>
 </template>
@@ -48,7 +44,7 @@ export default {
   data() {
     return {
       state: 'initial',
-      kittens: this.getRandomData(),
+      flow: this.getFlow(),
       ratio: 0
     };
   },
@@ -59,64 +55,16 @@ export default {
     },
     onAction(done) {
       setTimeout(() => {
-        this.kittens = [...this.kittens, this.getRandomKitten()];
+        this.flow = this.getFlow();
         done();
       }, 1500);
     },
-    getRandomName() {
-      const names = ['Oscar', 'Max', 'Tiger', 'Sam', 'Misty', 'Simba', 'Coco', 'Chloe', 'Lucy', 'Missy'];
-      return names[Math.floor(Math.random() * names.length)];
-    },
-    getRandomUrl() {
-      const width = 40 + Math.floor(20 * Math.random());
-      const height = 40 + Math.floor(20 * Math.random());
-
-      return `https://placekitten.com/g/${width}/${height}`;
-    },
-    getRandomKitten() {
-      return {
-        name: this.getRandomName(),
-        url: this.getRandomUrl()
-      };
-    },
-    getRandomData() {
-      const data = [];
-      for (let i = 0; i < 8; i++) {
-        data.push(this.getRandomKitten());
-      }
-      return data;
+    getFlow() {
+      return this.$store.state.bussflow.current;
     }
   }
 };
 </script>
 
 <style>
-.pull-hook-spinner {
-  color: #666;
-  transition: transform .25s ease-in-out;
-}
-
-.pull-hook-progress {
-  background-color: white;
-  width: 32px;
-  height: 32px;
-  margin: 30px auto 0;
-  border-radius: 100%;
-  position: relative;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  display: inline-block;
-  line-height: 0px;
-}
-
-.pull-hook-progress .progress-circular {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 4px;
-  left: 4px;
-}
-
-.pull-hook-progress .progress-circular__primary {
-  transition: stroke-dashoffset 0s;
-}
 </style>

@@ -35,7 +35,8 @@ export default {
   },
   methods: {
     push(page, key, flow) {
-      this.$store.commit('bussflow/set', { extends: flow });
+      console.log(flow.from);
+      this.$store.commit('bussflow/set', flow);
       this.$store.commit('navigator/push', {
         extends: page,
         data() {
